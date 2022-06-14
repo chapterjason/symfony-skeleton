@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+BIN_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_DIRECTORY="$( cd "${BIN_DIRECTORY}/.." && pwd )"
+
+pushd "${PROJECT_DIRECTORY}" > /dev/null
+
+"$PROJECT_DIRECTORY/vendor/bin/phpmd" . ansi cleancode,codesize,controversial,design,naming,unusedcode --exclude "*vendor*,*var*" "$@"
